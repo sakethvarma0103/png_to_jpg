@@ -23,7 +23,7 @@ jobs:
             convert "$img" "$new_img" && rm "$img"
           done
 
-      - name: Commit converted JPGs
+      - name: Commit and push JPGs
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
