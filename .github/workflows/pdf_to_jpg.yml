@@ -16,11 +16,11 @@ jobs:
       - name: Install ImageMagick
         run: sudo apt-get update && sudo apt-get install -y imagemagick
 
-      - name: Convert PNG to JPG
+      - name: Convert PNG to JPG and delete PNGs
         run: |
-          for img in $(find . -name "*.png"); do
+          find . -type f -name "*.png" -print0 | while IFS= read -r -d '' img; do
             new_img="${img%.png}.jpg"
-            convert "$img" "$new_img"
+            convert "$img" "$new_img" && rm "$img"
           done
 
       - name: Commit converted JPGs
